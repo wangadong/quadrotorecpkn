@@ -32,10 +32,10 @@
 									<listOptionValue builtIn="false" value="_UNICODE"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.include.paths.704551019" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;C:\wxWidgets2.8\lib\gcc_lib\mswud&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;C:\wxWidgets2.8\lib\gcc_lib\mswu&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;C:\wxWidgets2.8\include&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;C:\wxWidgets2.8\contrib\include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${WXWIN}\lib\gcc_lib\mswud&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${WXWIN}\lib\gcc_lib\mswu&quot;"/>
+									<listOptionValue builtIn="false" value="${WXWIN}\include"/>
+									<listOptionValue builtIn="false" value="&quot;${WXWIN}\contrib\include&quot;"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.other.other.1850130708" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-c -Wundef -Wno-ctor-dtor-privacy -fno-strict-aliasing" valueType="string"/>
 								<option id="gnu.cpp.compiler.option.other.verbose.581259325" name="Verbose (-v)" superClass="gnu.cpp.compiler.option.other.verbose" value="true" valueType="boolean"/>
@@ -81,11 +81,11 @@
 									<listOptionValue builtIn="false" value="wsock32"/>
 									<listOptionValue builtIn="false" value="odbc32"/>
 								</option>
-								<option id="gnu.cpp.link.option.paths.1774553289" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
-									<listOptionValue builtIn="false" value="&quot;C:/wxWidgets2.8/lib/gcc_lib&quot;"/>
-									<listOptionValue builtIn="false" value="C:/wxWidgets2.8/lib"/>
+								<option id="gnu.cpp.link.option.paths.1774553289" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
+									<listOptionValue builtIn="false" value="&quot;${WXWIN}/lib/gcc_lib&quot;"/>
+									<listOptionValue builtIn="false" value="${WXWIN}/lib"/>
 								</option>
-								<option id="gnu.cpp.link.option.flags.1244749445" superClass="gnu.cpp.link.option.flags" value="-Wl,--subsystem,windows -mwindows" valueType="string"/>
+								<option id="gnu.cpp.link.option.flags.1244749445" name="Linker flags" superClass="gnu.cpp.link.option.flags" value="-Wl,--subsystem,windows -mwindows" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.359040733" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
