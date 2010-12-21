@@ -1,0 +1,7 @@
+#Mon Nov 08 20:59:31 CST 2010
+eclipse.preferences.version=1
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.776134532/PATH/delimiter=;
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.776134532/PATH/operation=replace
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.776134532/PATH/value=C\:\\mingw\\bin;C\:/eclipse/jre/bin/client;C\:/eclipse/jre/bin;C\:/eclipse/jre/lib/i386;C\:\\MinGW\\bin;C\:\\Windows\\System32;C\:\\MSPGCC4\\bin
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.776134532/append=true
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.776134532/appendContributed=true
