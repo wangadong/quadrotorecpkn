@@ -1,4 +1,4 @@
-#Tue Dec 21 20:22:02 CST 2010
+#Wed Dec 22 14:07:04 CST 2010
 eclipse.preferences.version=1
 environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.776719171.1575487055/MSP430_PART_NUMBER/delimiter=;
 environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.776719171.1575487055/MSP430_PART_NUMBER/operation=replace
@@ -45,7 +45,10 @@ environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.776719171.187060
 environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.776719171.1870607032/MSP430_PART_NUMBER/value=msp430x2232
 environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.776719171.1870607032/MSPGCC4_HOME/delimiter=;
 environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.776719171.1870607032/MSPGCC4_HOME/operation=replace
-environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.776719171.1870607032/MSPGCC4_HOME/value=D\:\\MSPGCC4
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.776719171.1870607032/MSPGCC4_HOME/value=C\:\\MSPGCC4
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.776719171.1870607032/PATH/delimiter=;
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.776719171.1870607032/PATH/operation=replace
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.776719171.1870607032/PATH/value=C\:\\mingw\\bin;C\:\\MSPGCC4\\bin;C\:/eclipse/jre/bin/client;C\:/eclipse/jre/bin;C\:/eclipse/jre/lib/i386;C\:\\Program Files\\NVIDIA Corporation\\PhysX\\Common;C\:\\Windows\\system32;C\:\\Windows;C\:\\Windows\\System32\\Wbem;C\:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C\:\\Program Files\\Common Files\\Thunder Network\\KanKan\\Codecs;C\:\\ScilabDistribution\\Java\\jdk1.6.0_20\\bin;C\:\\ScilabDistribution\\scilab-5.2.2\\bin;C\:\\MinGW\\bin;C\:\\Qt\\2010.05\\qt\\bin;C\:\\Program Files\\Common Files\\TTKN\\Bin;D\:\\Program Files\\Altium Designer Summer 09\\System;C\:\\Program Files\\Google\\google_appengine\\
 environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.776719171.1870607032/append=true
 environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.776719171.1870607032/appendContributed=true
 environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.776719171.2006069903/MSP430_PART_NUMBER/delimiter=;
@@ -77,6 +80,6 @@ environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.776719171/MSP430
 environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.776719171/MSP430_PART_NUMBER/value=msp430x2232
 environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.776719171/MSPGCC4_HOME/delimiter=;
 environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.776719171/MSPGCC4_HOME/operation=replace
-environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.776719171/MSPGCC4_HOME/value=D\:\\MSPGCC4
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.776719171/MSPGCC4_HOME/value=C\:\\MSPGCC4
 environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.776719171/append=true
 environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.776719171/appendContributed=true
