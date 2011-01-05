@@ -3,7 +3,6 @@
 
 #include "SMPL.h"
 #include "HyenaWire.h"
-
 /**
  * build 101: sent to Liuzhou.  all features work.
  * build 102: refining for better code quality.
@@ -60,7 +59,7 @@
 /**
  * The length of command message
  */
-#define COMMAND_MAX_LENGTH_IN_BYTES 30
+#define COMMAND_MAX_LENGTH_IN_BYTES 14
 
 #define WRITE_TRY_TIMES_IN_SEND 100
 
@@ -143,7 +142,21 @@ typedef struct {
 	unsigned char direction;
 	addr_t targetAddr;
 } action_t;
+#define RSSI_RECEIVER_ADDRESS {0xAB,0x00}
+#define RSSI_SENDER_ADDRESS {0xAC,0x00}
+#define RSSI_LENGTH_POSITION_IN_COMMAND 5
+#define RSSI_POSITION_IN_COMMAND 6
 
+#define IDLE_PER_LOOP 500
+/**
+ * store address of receive node.
+ */
+static addr_t addrOfSenderR = INVALID_ADDRESS;
+static addr_t addrOfSenderS = RSSI_RECEIVER_ADDRESS;
+/**
+ * addresses of this nodes.
+ */
+static addr_t addrOfNode = RSSI_SENDER_ADDRESS;
 unsigned char send(addr_t *, unsigned char *);
 unsigned char receive(addr_t *, unsigned char *);
 void turnOnWOR(void);

@@ -13,12 +13,12 @@
 /**
  * addresses of this nodes.
  */
-static addr_t addrOfNode = {RSSI_SENDER_ADDRESS};
+static addr_t addrOfNode = { RSSI_SENDER_ADDRESS };
 
 /**
  * addresses of receiver nodes.
  */
-static addr_t addrOfReceiver = {RSSI_RECEIVER_ADDRESS};
+static addr_t addrOfReceiver = { RSSI_RECEIVER_ADDRESS };
 
 unsigned char messageID = 0;
 
