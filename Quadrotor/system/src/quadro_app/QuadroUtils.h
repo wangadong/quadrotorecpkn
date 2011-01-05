@@ -10,7 +10,7 @@
 
 #include "BspDef.h"
 #include "Led.h"
-#include "SMPL.h"
+#include "SMPLQ.h"
 #include "analog.h"
 #include <string.h>
 
