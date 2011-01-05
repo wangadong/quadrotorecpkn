@@ -6,6 +6,12 @@
  */
 
 #include "QuadroUtils.h"
-void main(void) {
+int main(void) {
 
+	quadroInit();
+	if(ADReady!=0){
+		getADValues();
+		writeToUart(msg,COMMAND_MAX_LENGTH_IN_BYTES);
+		ADReady=0;
+	}
 }
