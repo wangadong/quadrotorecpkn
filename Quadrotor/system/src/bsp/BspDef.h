@@ -5,7 +5,7 @@
  */
 #ifndef BSP_H
 #define BSP_H
-#define __GNUC__
+
 /**
  * for mspgcc include.
  */
