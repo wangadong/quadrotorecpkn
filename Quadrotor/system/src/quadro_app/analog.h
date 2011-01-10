@@ -3,6 +3,7 @@
 
 #include <inttypes.h>
 #include "BspDef.h"
+#include "variables.h"
 /*extern volatile uint16_t MeasurementCounter;
  extern volatile int16_t UBat;
  extern volatile int16_t AdValueGyroNick, AdValueGyroRoll, AdValueGyroYaw;
@@ -23,13 +24,11 @@
 
  void SearchAirPressureOffset(void);
  void SearchDacGyroOffset(void);*/
-static volatile int AdValueGyroNick = 0, AdValueGyroRoll = 0, AdValueGyroYaw = 0;
-static volatile int AdValueAccRoll = 0, AdValueAccNick = 0, AdValueAccTop = 0;
-static volatile unsigned char ADReady = 0;
+
 void ADC_Init(void);
 
 // clear ADC enable & ADC Start Conversion & ADC Interrupt Enable bit
-#define ADC_Disable() ADC10CTL0 &=~ ENC + ADC10SC+ADC10IE;
+#define ADC_Disable() ADC10CTL0 &=~ ENC + ADC10SC+ADC10IE
 // set ADC enable & ADC Start Conversion & ADC Interrupt Enable bit
-#define ADC_Enable() ADC10CTL0 |= ENC + ADC10SC+ADC10IE;
+#define ADC_Enable() ADC10CTL0 |= ENC + ADC10SC+ADC10IE
 #endif //_ANALOG_H

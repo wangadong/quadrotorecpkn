@@ -24,7 +24,7 @@ unsigned char send(addr_t * addr, unsigned char * msg) {
 				== SMPL_SUCCESS) {
 			return SUCCESS;
 		}
-		FEED_WDT;
+//		FEED_WDT;
 	}
 	return FAILURE;
 }

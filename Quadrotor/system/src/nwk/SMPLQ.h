@@ -8,6 +8,8 @@
 #ifndef SMPLQ_H_
 #define SMPLQ_H_
 
+
+#include "BspDef.h"
 #include "nwk_api.h"
 
 #include "Led.h"

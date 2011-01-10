@@ -3,9 +3,10 @@
  * ADC Control
  * 2011/1/1
  */
+#include "BspDef.h"
+#include "Led.h"
 #include "analog.h"
-
-
+#include "Uart.h"
 /*volatile uint16_t Test = 0;
 
  volatile int16_t UBat = 100;
@@ -33,18 +34,18 @@
  ****************************************************/
 void ADC_Init(void) {
 	// disable all interrupts before reconfiguration
-	BSP_DISABLE_INTERRUPTS();
 	ADC10CTL1 |= INCH_15 + ADC10DIV_7 + ADC10SSEL_0 + CONSEQ_3;
-	ADC10CTL0 |= SREF_1 + ADC10SHT_3 + MSC + REF2_5V + REFON + ADC10ON + ADC10IE;
+	ADC10CTL0 |= SREF_1 + ADC10SHT_3 + MSC + REF2_5V + REFON + ADC10ON
+			+ ADC10IE;
 	//Auto Trigger Enable, Prescaler Select Bits to Division Factor 128, i.e. ADC clock = SYSCKL/128 = 156.25 kHz
 	ADC10AE0 |= BIT3 + BIT4 + BIT6 + BIT7;
 	ADC10AE1 |= BIT4 + BIT7;
-	BSP_ENABLE_INTERRUPTS();
 	ADC10CTL1 &= ~ADC10IFG;
 	// Start AD conversion
-	ADC_Enable();
 	// restore global interrupt flags
+
 }
+
 /*
 
  void SearchAirPressureOffset(void) {
@@ -158,12 +159,12 @@ void ADC_Init(void) {
 
 BSP_ISR_FUNCTION( adcFun, ADC10_VECTOR)
 {
-	FEED_WDT;
 	static volatile unsigned int state = 0;
 
 	switch (state++) {
 	case 0:
 		AdValueAccNick = ADC10MEM;
+
 		break;
 	case 1:
 		AdValueGyroYaw = ADC10MEM;
@@ -179,14 +180,11 @@ BSP_ISR_FUNCTION( adcFun, ADC10_VECTOR)
 		break;
 	case 5:
 		AdValueAccTop = ADC10MEM;
-		ADReady=1;
+		ADReady = 1;
 		state = 0;
-		ADC_Enable()
 		break;
 	default:
 		state = 0;
-		ADC_Enable()
 
 	}
 }
-

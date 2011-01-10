@@ -12,6 +12,7 @@
 #include "Led.h"
 #include "SMPLQ.h"
 #include "analog.h"
+#include "variables.h"
 #include <string.h>
 
 
@@ -24,7 +25,6 @@
 #define RELAY_LOW 0x02
 
 
-#define COMMAND_MAX_LENGTH_IN_BYTES 14
 
 #define WRITE_TRY_TIMES_IN_SEND 100
 /* Program Status */
@@ -51,13 +51,11 @@ static addr_t addrOfSenderS = {RECEIVER_ADDRESS};
  * addresses of this nodes.
  */
 static addr_t addrOfQuadro = QUADRO_ADDRESS;
-static unsigned char msg[COMMAND_MAX_LENGTH_IN_BYTES] = { 0 };
-
 
 
 unsigned char send(addr_t *, unsigned char *);
 unsigned char receive(addr_t *, unsigned char *);
-void getADValues();
+//void getADValues();
 /**
  * 出错提示 using LED
  */
@@ -67,7 +65,7 @@ void errorLog(void);
  * 警告提示 using LED
  */
 void warningLog(void);
-
+void getADValues(void);
 void writeToUart(unsigned char *, unsigned char);
 unsigned char getFromUart(unsigned char *);
 #endif /* QUADROUTILS_H_ */

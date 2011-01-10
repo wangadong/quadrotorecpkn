@@ -87,14 +87,14 @@ void initLeds(void) {
  * @param idle 每次亮/灭的持续毫秒数(milliseconds)
  */
 void twinkleLed(unsigned char led, unsigned char times, unsigned char idle) {
-	FEED_WDT;
+//	FEED_WDT;
 	while (times--) {
 		turnOffLed(led);
 		delayInMs_BSP(idle);
 		turnOnLed(led);
 		delayInMs_BSP(idle);
 	}
-	FEED_WDT;
+//	FEED_WDT;
 }
 
 /**
@@ -103,15 +103,15 @@ void twinkleLed(unsigned char led, unsigned char times, unsigned char idle) {
  * 要求是阻断的，即在提示出错时主芯片不进行其它工作
  */
 void errorLog() {
-	FEED_WDT;
+//	FEED_WDT;
 	for (register unsigned char i = 0; i < 3; i++) {
-		FEED_WDT;
+//		FEED_WDT;
 		turnOnLeds();
 		delayInMs_BSP(300);
 		turnOffLeds();
 		delayInMs_BSP(300);
 	}
-	FEED_WDT;
+//	FEED_WDT;
 }
 
 /**
@@ -121,14 +121,14 @@ void errorLog() {
 void warningLog() {
 	turnOnLed(LED1);
 	turnOffLed(LED2);
-	FEED_WDT;
+//	FEED_WDT;
 	for (register unsigned char i = 0; i < 6; i++) {
-		FEED_WDT;
+//		FEED_WDT;
 		delayInMs_BSP(300);
 		toggleLed(LED1);
 		toggleLed(LED2);
 	}
-	FEED_WDT;
+//	FEED_WDT;
 }
 
 /**

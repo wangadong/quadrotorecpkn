@@ -11,6 +11,5 @@ void quadroInit(void) {
 	BSP_Init();
 	initLeds();
 	initUart();
-	SMPL_Init();
 	ADC_Init();
 }
