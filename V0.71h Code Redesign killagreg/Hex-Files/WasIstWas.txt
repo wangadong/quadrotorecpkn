@@ -1,0 +1,26 @@
++++++++++++++++++++++++++
++ Flight-Ctrl:
++++++++++++++++++++++++++
+BootLoader_MEGA644_20MHZ_V0_1.hex
+   Der Bootloader wird per ISP eingespielt
+   Der Bootloader nur dann eingespielt werden, wenn noch nie ein Bootloader eingespielt wurde!
+   Danach können Softwareupdates seriell eingespielt werden.
+
+Aktuelle Firmware 
+Wird per serielle Schnittstelle (durch den Bootloader) eingespielt
+Flight-Ctrl SW >= 0.70 benötigt das Kopter-Tool 1.53
+
+Flight-Ctrl_MEGA644_KILLAGREG_V0_70d.hex	für Atmega644 mit Extension Board für MM3 und Conrad-GPS at Uart1
+Flight-Ctrl_MEGA644_NAVICTRL_V0_70d.hex		für Atmega644 mit NaviCtrl
+Flight-Ctrl_MEGA644_MK3MAG_V0_70d.hex		für Atmega644 mit Support für den CMPS03/MK3MAG und Conrad-GPS at Uart 1
+
+
+Flight-Ctrl_MEGA644p_KILLAGREG_V0_70d.hex	für Atmega644p mit Extension Board für MM3 und Conrad-GPS at Uart 2
+Flight-Ctrl_MEGA644p_NAVICTRL_V0_70d.hex	für Atmega644p mit NaviCtrl
+Flight-Ctrl_MEGA644p_MK3MAG_V0_70d.hex		für Atmega644p mit Support für den CMPS03/MK3MAG und Conrad-GPS at Uart 2
+
+Die Firmware läuft sowohl auf der FC 1.0/1.1/1.2/1.3
+
+
+   
+   
