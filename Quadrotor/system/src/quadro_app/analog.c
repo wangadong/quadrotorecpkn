@@ -33,16 +33,22 @@
  Initialize Analog Digital Converter
  ****************************************************/
 void ADC_Init(void) {
-	// disable all interrupts before reconfiguration
-	ADC10CTL1 |= INCH_15 + ADC10DIV_7 + ADC10SSEL_0 + CONSEQ_3;
-	ADC10CTL0 |= SREF_1 + ADC10SHT_3 + MSC + REF2_5V + REFON + ADC10ON
-			+ ADC10IE;
-	//Auto Trigger Enable, Prescaler Select Bits to Division Factor 128, i.e. ADC clock = SYSCKL/128 = 156.25 kHz
-	ADC10AE0 |= BIT3 + BIT4 + BIT6 + BIT7;
-	ADC10AE1 |= BIT4 + BIT7;
+	/*
+	 // disable all interrupts before reconfiguration
+	 ADC10CTL1 |= INCH_15 + ADC10DIV_7 + ADC10SSEL_0 + CONSEQ_3;
+	 ADC10CTL0 |= SREF_1 + ADC10SHT_3 + MSC + REF2_5V + REFON + ADC10ON
+	 + ADC10IE;
+	 //Auto Trigger Enable, Prescaler Select Bits to Division Factor 128, i.e. ADC clock = SYSCKL/128 = 156.25 kHz
+	 ADC10AE0 |= BIT3 + BIT4 + BIT6 + BIT7;
+	 ADC10AE1 |= BIT4 + BIT7;
+	 ADC10CTL1 &= ~ADC10IFG;
+	 // Start AD conversion
+	 // restore global interrupt flags
+	 */
+//	ADC10CTL1 |= ADC10DIV_3 + ADC10SSEL_0 + CONSEQ_0;
+	ADC10CTL0 |= SREF_1 + ADC10SHT_2 + REF2_5V + REFON + ADC10ON + ADC10IE;
+	ADC10AE0 |= BIT4;
 	ADC10CTL1 &= ~ADC10IFG;
-	// Start AD conversion
-	// restore global interrupt flags
 
 }
 
@@ -157,34 +163,49 @@ void ADC_Init(void) {
 //pitch(nick) acc---A4
 //top acc---A15
 
+/*BSP_ISR_FUNCTION( adcFun, ADC10_VECTOR)
+ {
+ static volatile unsigned int state = 0;
+
+ switch (state++) {
+ case 0:
+ AdValueAccNick = ADC10MEM;
+ //		AdValueAccNick = AdValueAccNick * 2.5 / 2013;
+ break;
+ case 1:
+ AdValueGyroYaw = ADC10MEM;
+ //		AdValueGyroYaw = AdValueGyroYaw * 2.5 / 2013;
+ break;
+ case 2:
+ AdValueGyroNick = ADC10MEM;
+ //		AdValueGyroNick = AdValueGyroNick * 2.5 / 2013;
+ break;
+ case 3:
+ AdValueGyroRoll = ADC10MEM;
+ //		AdValueGyroRoll = AdValueGyroRoll * 2.5 / 2013;
+ break;
+ case 4:
+ AdValueAccRoll = ADC10MEM;
+ //		AdValueAccRoll = AdValueAccRoll * 2.5 / 2013;
+ break;
+ case 5:
+ AdValueAccTop = ADC10MEM;
+ //		AdValueAccTop = AdValueAccTop * 2.5 / 2013;
+ ADReady = 1;
+ getADValues();
+ writeToUart(msg, 14);
+ state = 0;
+ break;
+ default:
+ state = 0;
+
+ }
+ }*/
 BSP_ISR_FUNCTION( adcFun, ADC10_VECTOR)
-{
-	static volatile unsigned int state = 0;
-
-	switch (state++) {
-	case 0:
-		AdValueAccNick = ADC10MEM;
-
-		break;
-	case 1:
-		AdValueGyroYaw = ADC10MEM;
-		break;
-	case 2:
-		AdValueGyroNick = ADC10MEM;
-		break;
-	case 3:
-		AdValueGyroRoll = ADC10MEM;
-		break;
-	case 4:
-		AdValueAccRoll = ADC10MEM;
-		break;
-	case 5:
-		AdValueAccTop = ADC10MEM;
-		ADReady = 1;
-		state = 0;
-		break;
-	default:
-		state = 0;
-
-	}
-}
+ {
+	long temp;
+//	 AdValueAccNick = (int)ADC10MEM * 2500 /1024;
+	AdValueAccNick = (int)ADC10MEM;
+	 writeToUart_BSP(&AdValueAccNick,1);
+	 ADReady=1;
+ }
