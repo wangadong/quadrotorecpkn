@@ -28,7 +28,7 @@
 void ADC_Init(void);
 
 // clear ADC enable & ADC Start Conversion & ADC Interrupt Enable bit
-#define ADC_Disable() ADC10CTL0 &=~ ENC + ADC10SC+ADC10IE
+#define ADC_Disable() ADC10CTL0 &=~ (ENC + ADC10SC+ADC10IE)
 // set ADC enable & ADC Start Conversion & ADC Interrupt Enable bit
-#define ADC_Enable() ADC10CTL0 |= ENC + ADC10SC+ADC10IE
+#define ADC_Enable() ADC10CTL0 |= ENC + ADC10SC
 #endif //_ANALOG_H
