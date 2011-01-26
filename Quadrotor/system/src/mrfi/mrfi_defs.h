@@ -42,10 +42,10 @@
 
 /* CSn Pin Configuration P3.0 */
 #define __mrfi_SPI_CSN_GPIO_BIT__             0
-#define MRFI_SPI_CONFIG_CSN_PIN_AS_OUTPUT()   st( P3DIR |=  BV(__mrfi_SPI_CSN_GPIO_BIT__); )
-#define MRFI_SPI_DRIVE_CSN_HIGH()             st( P3OUT |=  BV(__mrfi_SPI_CSN_GPIO_BIT__); ) /* atomic operation */
-#define MRFI_SPI_DRIVE_CSN_LOW()              st( P3OUT &= ~BV(__mrfi_SPI_CSN_GPIO_BIT__); ) /* atomic operation */
-#define MRFI_SPI_CSN_IS_HIGH()                 (  P3OUT &   BV(__mrfi_SPI_CSN_GPIO_BIT__) )
+#define MRFI_SPI_CONFIG_CSN_PIN_AS_OUTPUT()   st( P2DIR |=  BV(__mrfi_SPI_CSN_GPIO_BIT__); )
+#define MRFI_SPI_DRIVE_CSN_HIGH()             st( P2OUT |=  BV(__mrfi_SPI_CSN_GPIO_BIT__); ) /* atomic operation */
+#define MRFI_SPI_DRIVE_CSN_LOW()              st( P2OUT &= ~BV(__mrfi_SPI_CSN_GPIO_BIT__); ) /* atomic operation */
+#define MRFI_SPI_CSN_IS_HIGH()                 (  P2OUT &   BV(__mrfi_SPI_CSN_GPIO_BIT__) )
 
 /* SCLK Pin Configuration P3.3 */
 #define __mrfi_SPI_SCLK_GPIO_BIT__            3
