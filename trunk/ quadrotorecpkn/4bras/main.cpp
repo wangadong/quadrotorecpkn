@@ -1,6 +1,8 @@
-#include <QtGui/QApplication>
+#include <QApplication>
+#include <windows.h>
 #include "mainwindow.h"
-
+#include <QSplashScreen>
+#include <Qt>
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);

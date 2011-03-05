@@ -63,7 +63,6 @@ Mycom::Mycom()
     checkBox_Display = new QCheckBox(tr("Display"));
     checkBox_Draw = new QCheckBox(tr("Draw"));
 //Layout
-//------------------------------------------------------------------------------------------------------------
 //Uplayout:gird
     QGridLayout * UpLayout = new QGridLayout();
     UpLayout->addWidget(label_acce_x,0,0);
@@ -81,8 +80,6 @@ Mycom::Mycom()
     UpLayout->addWidget(lineEdit_ang_y,4,1);
     UpLayout->addWidget(lineEdit_ang_z,5,1);
     UpLayout->addWidget(lineEdit_barometre,6,1);
-//------------------------------------------------------------------------------------------------------------
-//------------------------------------------------------------------------------------------------------------
 //Midlayout:gird
     QGridLayout * MidLayout=new QGridLayout();
     MidLayout->addWidget(label_ComNum,0,0);
@@ -105,8 +102,6 @@ Mycom::Mycom()
     MidLayout->addWidget(checkBox_Storage,2,3);
     MidLayout->addWidget(checkBox_Display,3,3);
     MidLayout->addWidget(checkBox_Draw,4,3);
-//------------------------------------------------------------------------------------------------------------
-//------------------------------------------------------------------------------------------------------------
 //Baselayout:vertical
     QVBoxLayout * BaseLayout=new QVBoxLayout();
     BaseLayout->addWidget(label_Datas_envoyes);
@@ -118,26 +113,22 @@ Mycom::Mycom()
     BaseLayout->addWidget(pushButton_Recount);
     BaseLayout->addWidget(pushButton_Send);
     BaseLayout->addWidget(pushButton_LoopSend);
-//------------------------------------------------------------------------------------------------------------
 //Mainlayout:vertical
     QVBoxLayout * mainLayout = new QVBoxLayout(this);
     this->setLayout(mainLayout);
     mainLayout->addLayout(UpLayout);
     mainLayout->addLayout(MidLayout);
     mainLayout->addLayout(BaseLayout);
-//------------------------------------------------------------------------------------------------------------
-//------------------------------------------------------------------------------------------------------------
 //Init
     init_com();
-//------------------------------------------------------------------------------------------------------------
-//------------------------------------------------------------------------------------------------------------
 //Creat port
     port=new Win_QextSerialPort();
     connect(port,SIGNAL(readyRead()),this,SLOT(readMycom()));
-//------------------------------------------------------------------------------------------------------------
-//------------------------------------------------------------------------------------------------------------
-//All connect
-//---------------------------------------------------------------------------------------------------------
+
+    port = new Win_QextSerialPort();
+    byteRecevu = byteEnvoie = 0;
+    thread = new machineThread(port);
+    thread->start();
 //comboBox相关
     QObject::connect(comboBox_Baudrate,SIGNAL(currentIndexChanged(const QString &)),
                      this,SLOT(comboBox_Baudrate_currentIndexChanged(const QString &)));
@@ -149,17 +140,13 @@ Mycom::Mycom()
                      this,SLOT(comboBox_Stopbit_currentIndexChanged(const QString &)));
     QObject::connect(comboBox_Control_flow,SIGNAL(currentIndexChanged(const QString &)),
                      this,SLOT(comboBox_Controlflow_currentIndexChanged(const QString &)));
-//    QObject::connect(comboBox_DataSource,SIGNAL(currentIndexChanged(int)),comthread,SLOT(datasourcechanged(int)));
-}
-
-void Mycom::readMycom()
-{
-    QByteArray temp=port->readAll();
-    textEdit_Recevied->insertPlainText(temp);
-
-}
-
-
+    QObject::connect(pushButton_OpenCom, SIGNAL(clicked()), this, SLOT(opencom_port()));
+    QObject::connect(this,SIGNAL(comopen(QString)),thread,SLOT(openport(QString)));
+    QObject::connect(thread,SIGNAL(setopenbutton(const char*)),this,SLOT(setopenbutton(const char*)));
+    QObject::connect(thread,SIGNAL(threadError(int)),this,SLOT(threaderror(int)));
+    QObject::connect(thread,SIGNAL(portIsOpen(bool)),this,SLOT(portisopen(bool)));
+ }
+//-----------------------------------------------------------------------------------------------------------
 void Mycom::init_com()
 {
 
@@ -172,40 +159,40 @@ void Mycom::init_com()
     QStringList DataBitslist;//可选数据位
     QStringList StopBitslist;//可选终止位
     QStringList ControlFlowlist;//是否使用流量控制
+    msg="";
 
-        int kk = key.size();
-        int i;
-        comlist.clear();
-        for(i=0;i<kk;i++)
-        {
-            comlist << getcomm(i,"value");
-        }
-        comboBox_ComNum->addItems(comlist);
-        Baudlist.clear();
-        Baudlist<< "300" << "600" << "1200" << "2400" << "4800" << "9600"
-                << "19200" << "38400" << "56000" << "57600" << "115200";
-        comboBox_Baudrate->addItems(Baudlist);
+    int kk = key.size();
+    int i;
+    comlist.clear();
+    for(i=0;i<kk;i++)
+    {
+      comlist << getcomm(i,"value");
+    }
+    comboBox_ComNum->addItems(comlist);
+    Baudlist.clear();
+    Baudlist<< "300" << "600" << "1200" << "2400" << "4800" << "9600"
+            << "19200" << "38400" << "56000" << "57600" << "115200";
+    comboBox_Baudrate->addItems(Baudlist);
 
-        Paritylist.clear();
-        Paritylist<< "NONE" << "ODD" << "EVEN";//ODD为奇效验，EVEN为偶效验
-        comboBox_Parity_bit->addItems(Paritylist);
+    Paritylist.clear();
+    Paritylist<< "NONE" << "ODD" << "EVEN";//ODD为奇效验，EVEN为偶效验
+    comboBox_Parity_bit->addItems(Paritylist);
 
-        DataBitslist.clear();
-        DataBitslist<< "8" << "7" << "6";
-        comboBox_Data_bit->addItems(DataBitslist);
+    DataBitslist.clear();
+    DataBitslist<< "8" << "7" << "6";
+    comboBox_Data_bit->addItems(DataBitslist);
 
-        StopBitslist.clear();
-        StopBitslist<< "1" << "2";
-        comboBox_Stop_bit->addItems(StopBitslist);
+    StopBitslist.clear();
+    StopBitslist<< "1" << "2";
+    comboBox_Stop_bit->addItems(StopBitslist);
 
-        ControlFlowlist.clear();
-        ControlFlowlist<< "NONE" << "XON/XOFF" << "Hard";
-        comboBox_Control_flow->addItems(ControlFlowlist);
+    ControlFlowlist.clear();
+    ControlFlowlist<< "NONE" << "XON/XOFF" << "Hard";
+    comboBox_Control_flow->addItems(ControlFlowlist);
 
 //        qDebug("com list init!\n");
 }
-
-
+//----------------------------------------------------------------------------------------------------
 QString Mycom::getcomm(int index,QString keyorvalue)
 {
     QString commresult="";
@@ -253,10 +240,7 @@ QString Mycom::getcomm(int index,QString keyorvalue)
 ::RegCloseKey(hKey);//关闭注册表
 return commresult;
 }
-//-----------------------------------------------------------------------------------------
-//-----------------------------------------------------------------------------------------
 //Combox的相关槽函数
-//-----------------------------------------------------------------------------------------
 //串口选择comboBox
 void Mycom::opencom_port()
 {
@@ -387,4 +371,31 @@ else
         checkBox_Draw->setEnabled(true);
     }
 }
+//--------------------------------------------------------------------------------------------------
+void Mycom::writeDataSpace(dataSpace dataS)
+{
+    textEdit_Recevied->append("dataSpace_general information:\n");
+    textEdit_Recevied->insertPlainText(";  \n PosX: ");
+    textEdit_Recevied->insertPlainText(msg.number(dataS.PosX,'g',16));
+    textEdit_Recevied->insertPlainText(";  \n PosY: ");
+    textEdit_Recevied->insertPlainText(msg.number(dataS.PosY,'g',16));
+    textEdit_Recevied->insertPlainText(";  \n PosZ: ");
+    textEdit_Recevied->insertPlainText(msg.number(dataS.PosZ,'g',16));
+    textEdit_Recevied->insertPlainText(";  \n RotC: ");
+    textEdit_Recevied->insertPlainText(msg.number(dataS.RotC,'g',16));
+    textEdit_Recevied->insertPlainText(";  \n RotP: ");
+    textEdit_Recevied->insertPlainText(msg.number(dataS.RotP,'g',16));
+    textEdit_Recevied->insertPlainText(";  \n RotR: ");
+    textEdit_Recevied->insertPlainText(msg.number(dataS.RotR,'g',16));
+    textEdit_Recevied->insertPlainText("\n\n");
+}
+//--------------------------------------------------------------------------------------------------------
+void Mycom::setopenbutton(const char* openorclose)
+{
+    pushButton_OpenCom->setText(tr(openorclose));
+}
+//------------------------------------------------------------------------------------------------------------
+void Mycom::threaderror(int error)
+{
 
+}

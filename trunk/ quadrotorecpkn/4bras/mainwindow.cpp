@@ -2,8 +2,8 @@
 
 #include <QMenubar>
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
+MainWindow::MainWindow()
+//    : QMainWindow(parent)
 {
     setWindowTitle(tr("Console for quadrocopter"));
     workSpace = new QWorkspace(this);
@@ -12,6 +12,9 @@ MainWindow::MainWindow(QWidget *parent)
     fabriqueDockwin1();
     fabriqueDockwin2();
     fabriqueMenus();
+
+    QObject::connect(mycom->thread,SIGNAL(readsignal()),Module3d,SLOT(upselondataSlot()));
+    QObject::connect(mycom->thread,SIGNAL(setCRotation(float)),Module3d,SLOT(setCRotation(float)));
 }
 
 MainWindow::~MainWindow()
@@ -23,9 +26,8 @@ void MainWindow::fabriqueDockwin1()
 {
     Dockwin1=new QDockWidget(tr("3d view"),this);
     Dockwin1->setFeatures(QDockWidget::AllDockWidgetFeatures);
-//    Drone3d = new Drone3dWidget;
-    Drone3d= new QWidget(Dockwin1);
-    Dockwin1->setWidget( Drone3d );
+    Module3d = new Module3D;
+    Dockwin1->setWidget( Module3d );
     addDockWidget(Qt::LeftDockWidgetArea,Dockwin1);
 }
 

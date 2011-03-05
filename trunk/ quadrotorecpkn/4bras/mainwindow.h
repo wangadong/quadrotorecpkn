@@ -3,8 +3,11 @@
 
 #include <QtGui/QMainWindow>
 #include<QWorkspace>
+#include<QObject>
 #include<QDockWidget>
 #include "Mycom\Mycom.h"
+#include "Mycom\MachineThread.h"
+#include"3D/Module3D.h"
 
 class QAction;
 class QMenu;
@@ -17,7 +20,7 @@ class MainWindow : public QMainWindow
 
 public:
     //主窗口构造，析构
-    MainWindow(QWidget *parent = 0);
+    MainWindow();
     ~MainWindow();
     //构造串口子窗口
     void fabriqueDockwin1();
@@ -27,31 +30,19 @@ public:
 //    void fabriqueDockwin4();
     //构造菜单
     void fabriqueMenus();
+
 private:
     QWorkspace * workSpace;
     QDockWidget * Dockwin1;
     QDockWidget * Dockwin2;
     QMenu * Menu;
-    QWidget * Drone3d;
+    Module3D * Module3d;
     Mycom * mycom;
 
     QMenu *fileMenu;
     QMenu *toolMenu;
     QMenu *aboutMenu;
     QMenu *layoutMenu;
-
-//    QAction *exitAction;
-//    QAction *openAction;
-//    QAction *aboutAction;
-//    QAction *arrange;
-//    QAction *tile;
-//    QAction *cascade;
-
-//    QAction *dviewerAction;
-//    QAction *serialAction;
-//    QAction *mapviewAction;
-//    QAction *compassAction;
-//    QAction *videoAction;
 };
 
 #endif // MAINWINDOW_H

@@ -99,7 +99,6 @@
 				<buildTargets>
 					<target name="Qt Release Build" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 						<buildCommand>mingw32-make</buildCommand>
-						<buildArguments/>
 						<buildTarget>release</buildTarget>
 						<stopOnError>false</stopOnError>
 						<useDefaultCommand>false</useDefaultCommand>
@@ -107,7 +106,6 @@
 					</target>
 					<target name="Qt Debug Build" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 						<buildCommand>mingw32-make</buildCommand>
-						<buildArguments/>
 						<buildTarget>debug</buildTarget>
 						<stopOnError>false</stopOnError>
 						<useDefaultCommand>false</useDefaultCommand>
@@ -115,6 +113,7 @@
 					</target>
 				</buildTargets>
 			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 			<storageModule moduleId="org.eclipse.cdt.core.pathentry">
 				<pathentry base-path="D:/Qt/2010.05/qt/include" include="" kind="inc" path="" system="true"/>
 				<pathentry base-path="D:/Qt/2010.05/qt/include" include="ActiveQt" kind="inc" path="" system="true"/>
@@ -141,6 +140,9 @@
 				<pathentry base-path="D:/Qt/2010.05/qt/include" include="QtWebKit" kind="inc" path="" system="true"/>
 				<pathentry base-path="D:/Qt/2010.05/qt/include" include="QtXml" kind="inc" path="" system="true"/>
 				<pathentry base-path="D:/Qt/2010.05/qt/include" include="QtXmlPatterns" kind="inc" path="" system="true"/>
+				<pathentry include="D:/MinGW/include" kind="inc" path="" system="true"/>
+				<pathentry kind="src" path=""/>
+				<pathentry kind="out" path=""/>
 			</storageModule>
 		</cconfiguration>
 	</storageModule>

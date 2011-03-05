@@ -4,10 +4,12 @@ INPUT(
 ./debug\Mycom.o
 ./debug\win_qextserialport.o
 ./debug\qextserialbase.o
-./debug\ComThread.o
+./debug\Module3D.o
+./debug\MachineThread.o
 ./debug\moc_mainwindow.o
 ./debug\moc_Mycom.o
 ./debug\moc_win_qextserialport.o
 ./debug\moc_qextserialbase.o
-./debug\moc_ComThread.o
+./debug\moc_Module3D.o
+./debug\moc_MachineThread.o
 );
