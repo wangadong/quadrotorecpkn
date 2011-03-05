@@ -34,7 +34,8 @@ class ComThread: public QWidget
         bool PMdisplay;
         bool PMdraw;
         QTimer *readportTimer;
-        void checkDataPack(char* buff);
+//        void checkDataPack(char* buff);
+//        void writeDataPack(char* buff);
 
     signals:
         void readsignal();
@@ -43,7 +44,7 @@ class ComThread: public QWidget
         void portisopen(bool state);
 
     public slots:
-    char readport();
+//    char readport();
     void openport(QString port_name);
     void datasourcechanged(int ds);
     void PMstorechanged(bool st);

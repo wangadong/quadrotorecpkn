@@ -5,20 +5,24 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += opengl
 
 TARGET = 4bras
 TEMPLATE = app
-
+INCLUDEPATH += .
 
 SOURCES += main.cpp\
         mainwindow.cpp \
     Mycom/Mycom.cpp \
     Mycom/win_qextserialport.cpp \
     Mycom/qextserialbase.cpp \
-    Mycom/ComThread.cpp
+    3D/Module3D.cpp \
+    Mycom/MachineThread.cpp
 
 HEADERS  += mainwindow.h \
     Mycom/Mycom.h \
     Mycom/win_qextserialport.h \
     Mycom/qextserialbase.h \
-    Mycom/ComThread.h
+    3D/Module3D.h \
+    datafile/data_protocol.h \
+    Mycom/MachineThread.h

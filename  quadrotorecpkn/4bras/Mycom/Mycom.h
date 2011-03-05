@@ -8,7 +8,9 @@
 #include <QMutex>
 #include <QObject>
 #include <QThread>
+#include "MachineThread.h"
 #include "win_qextserialport.h"
+#include "datafile\data_protocol.h"
 
 class Mycom : public QWidget
 {
@@ -70,6 +72,8 @@ class Mycom : public QWidget
         QCheckBox * checkBox_Display;
         QCheckBox * checkBox_Draw;
 
+        machineThread * thread;
+
     private:
         void init_com();
 
@@ -79,13 +83,18 @@ class Mycom : public QWidget
         char keyvalue[256];  //键值数组
         DWORD keysize,type,valuesize;
         int indexnum;
+        int byteRecevu;
+        int byteEnvoie;
+
 
         QString getcomm(int index,QString keyorvalue);
+        QString msg;
+
 
     public slots:
-        void readMycom();//读取串口
         void opencom_port();//打开串口
         void portisopen(bool state);
+        void setopenbutton(const char *);
 //comboBox相关
         void comboBox_Baudrate_currentIndexChanged(const QString &);
         void comboBox_Paritybit_currentIndexChanged(const QString &);
@@ -94,6 +103,10 @@ class Mycom : public QWidget
         void comboBox_Controlflow_currentIndexChanged(const QString &);
 //checkBox相关
         void verifier_check();
+
+        void writeDataSpace(dataSpace dataS);
+
+        void threaderror(int error);
     signals:
         void comopen(QString port_name);
     };

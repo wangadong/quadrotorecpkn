@@ -15,8 +15,6 @@ ComThread::ComThread(Win_QextSerialPort *port)
     PMstore = false;
     PMdisplay = false;
     PMdraw = false;
-    lastdegree = 60.0;
-    currdegree = 0.0;
 }
 
 ComThread::~ComThread()
@@ -60,22 +58,22 @@ void ComThread::openport(QString port_name)
 }
 
 
-char ComThread::readport()
-{
-    char buff[1];
-    int numBytes;
-    numBytes = port->bytesAvailable();
-        if(numBytes > 0)
-        {
-            port->read(buff, 1);
-            bytesRced+=1;
-            emit bytesRcedChanged(bytesRced);
-            readportTimer->stop();
-            if (datasource == 0)
-                checkDataPack(buff);
-            else if (datasource == 1)
-                writeDataPack(buff);
-            //else;
-        }
-    return buff[0];
-}
+//char ComThread::readport()
+//{
+//    char buff[1];
+//    int numBytes;
+//    numBytes = port->bytesAvailable();
+//        if(numBytes > 0)
+//        {
+//            port->read(buff, 1);
+//            bytesRced+=1;
+//            readportTimer->stop();
+////            if (datasource == 0)
+////                checkDataPack(buff);
+////            else if (datasource == 1)
+////                writeDataPack(buff);
+//            //else;
+//        }
+//    return buff[0];
+//}
+
