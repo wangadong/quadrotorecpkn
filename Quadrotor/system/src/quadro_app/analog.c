@@ -30,7 +30,7 @@
  uint8_t PressureSensorOffset;*/
 static volatile unsigned char state = MAX_AD_INCH;
 static volatile unsigned int counterOfInterrupt = 0;
-static volatile unsigned short voltage[MAX_AD_INCH+1] = { 0 };
+
 /****************************************************
  Initialize Analog Digital Converter
  ****************************************************/

@@ -52,20 +52,20 @@ unsigned char receive(addr_t * addrOfSender, unsigned char * msg) {
 	return FAILURE;
 }
 void getADValues(){
-	msg[AD_ACC_NICK_POSITION] = AdValueAccNick >> 8;
-	msg[AD_ACC_NICK_POSITION + 1] = AdValueAccNick;
-	msg[AD_GYRO_YAW_POSITION] = AdValueGyroYaw >> 8;
-	msg[AD_GYRO_YAW_POSITION + 1] = AdValueGyroYaw;
-	msg[AD_GYRO_NICK_POSITION] = AdValueGyroNick >> 8;
-	msg[AD_GYRO_NICK_POSITION + 1] = AdValueGyroNick;
-	msg[AD_GYRO_ROLL_POSITION] = AdValueGyroRoll >> 8;
-	msg[AD_GYRO_ROLL_POSITION + 1] = AdValueGyroRoll;
-	msg[AD_ACC_ROLL_POSITION] = AdValueAccRoll >> 8;
-	msg[AD_ACC_ROLL_POSITION + 1] = AdValueAccRoll;
-	msg[AD_ACC_TOP_POSITION] = AdValueAccTop >> 8;
-	msg[AD_ACC_TOP_POSITION + 1] = AdValueAccTop;
-	msg[AD_ACC_TOP_POSITION + 2] = 0;
-	msg[AD_ACC_TOP_POSITION + 3] = 0;
+	msg[MsgBegin] = 'B';
+	msg[AD_ACC_NICK_POSITION] = voltage[AD_INCH_A3] >> 8;
+	msg[AD_ACC_NICK_POSITION + 1] = voltage[AD_INCH_A3];
+	msg[AD_GYRO_YAW_POSITION] = voltage[AD_INCH_A7] >> 8;
+	msg[AD_GYRO_YAW_POSITION + 1] = voltage[AD_INCH_A7];
+	msg[AD_GYRO_NICK_POSITION] = voltage[AD_INCH_A6] >> 8;
+	msg[AD_GYRO_NICK_POSITION + 1] = voltage[AD_INCH_A6];
+	msg[AD_GYRO_ROLL_POSITION] = voltage[AD_INCH_A12] >> 8;
+	msg[AD_GYRO_ROLL_POSITION + 1] = voltage[AD_INCH_A12];
+	msg[AD_ACC_ROLL_POSITION] = voltage[AD_INCH_A4] >> 8;
+	msg[AD_ACC_ROLL_POSITION + 1] = voltage[AD_INCH_A4];
+	msg[AD_ACC_TOP_POSITION] = voltage[AD_INCH_A15] >> 8;
+	msg[AD_ACC_TOP_POSITION + 1] = voltage[AD_INCH_A15];
+	msg[MsgEnd] = 'E';
 }
 /**
  * write data to uart in App-layer

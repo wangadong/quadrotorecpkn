@@ -37,13 +37,14 @@
 #define RECEIVER_ADDRESS {0xAC,0x00}
 
 //ADC msg information
-#define AD_GYRO_ROLL_POSITION	0
-#define AD_GYRO_NICK_POSITION	2
-#define AD_GYRO_YAW_POSITION	4
-#define AD_ACC_ROLL_POSITION	6
-#define AD_ACC_NICK_POSITION	8
-#define AD_ACC_TOP_POSITION		10
-
+#define MsgBegin 0
+#define AD_GYRO_ROLL_POSITION	1
+#define AD_GYRO_NICK_POSITION	3
+#define AD_GYRO_YAW_POSITION	5
+#define AD_ACC_ROLL_POSITION	7
+#define AD_ACC_NICK_POSITION	9
+#define AD_ACC_TOP_POSITION		11
+#define MsgEnd  13
 
 static addr_t addrOfSenderR = {INVALID_ADDRESS};
 static addr_t addrOfSenderS = {RECEIVER_ADDRESS};
