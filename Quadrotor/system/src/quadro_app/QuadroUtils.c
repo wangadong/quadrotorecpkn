@@ -24,7 +24,7 @@ unsigned char send(addr_t * addr, unsigned char * msg) {
 				== SMPL_SUCCESS) {
 			return SUCCESS;
 		}
-//		FEED_WDT;
+		//		FEED_WDT;
 	}
 	return FAILURE;
 }
@@ -51,7 +51,15 @@ unsigned char receive(addr_t * addrOfSender, unsigned char * msg) {
 	}
 	return FAILURE;
 }
-void getADValues(){
+void cal_Sensor_Volt() {
+	AdValueAccTop = voltage[AD_INCH_A15]*0.0024414;
+	AdValueGyroRoll = voltage[AD_INCH_A12]*0.0024414;
+	AdValueGyroYaw = voltage[AD_INCH_A7]*0.0024414;
+	AdValueGyroNick = voltage[AD_INCH_A6]*0.0024414;
+	AdValueAccNick = voltage[AD_INCH_A4] *0.0024414;
+	AdValueAccRoll = voltage[AD_INCH_A3]*0.0024414;
+}
+void getADValues() {
 	msg[MsgBegin] = 'B';
 	msg[AD_ACC_NICK_POSITION] = voltage[AD_INCH_A3] >> 8;
 	msg[AD_ACC_NICK_POSITION + 1] = voltage[AD_INCH_A3];

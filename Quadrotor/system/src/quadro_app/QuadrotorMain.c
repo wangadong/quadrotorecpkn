@@ -13,6 +13,7 @@ int main(void) {
 	ADC_Enable();
 	while (1) {
 		if (ADReady != 0) {
+			cal_Sensor_Volt();
 			getADValues();
 			writeToUart(msg, COMMAND_MAX_LENGTH_IN_BYTES);
 			ADReady = 0;

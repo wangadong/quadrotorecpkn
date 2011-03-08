@@ -66,6 +66,7 @@ void errorLog(void);
  * æØ∏ÊÃ· æ using LED
  */
 void warningLog(void);
+void cal_Sensor_Volt(void);
 void getADValues(void);
 void writeToUart(unsigned char *, unsigned char);
 unsigned char getFromUart(unsigned char *);

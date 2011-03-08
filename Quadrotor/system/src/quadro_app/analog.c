@@ -49,11 +49,11 @@ void ADC_Init(void) {
 	 */
 	//	ADC10CTL1 |= ADC10DIV_3 + ADC10SSEL_0 + CONSEQ_0;
 	/* ADC…Ë÷√:16 x ADC10CLKs, V(+)=V(Ref),REF on, V(Ref)=2.5V */
-	ADC10CTL0 = SREF_1 | ADC10SHT_2 | REFON | REF2_5V | MSC | ADC10IE | ADC10ON;
+	ADC10CTL0 = SREF_1 | ADC10SHT_3 | REFON | REF2_5V | MSC | ADC10IE | ADC10ON;
 
 	/* enable INCH_* analog input */
-	ADC10AE0|=BIT3+BIT4+BIT6+BIT7;
-	ADC10AE1|=BIT4+BIT7;
+//	ADC10AE0 |= BIT3 + BIT4 + BIT6 + BIT7;
+//	ADC10AE1 |= BIT4 + BIT7;
 
 	/* ADC…Ë÷√:INCH=A12, Sequence-of-Channels Mode, ADC10OSC, ADC10SC*/
 	ADC10CTL1 = INCH_15 | CONSEQ_1 | ADC10SSEL_0 | SHS_0;
@@ -171,74 +171,75 @@ void ADC_Init(void) {
 //pitch(nick) acc---A4
 //top acc---A15
 BSP_ISR_FUNCTION( adcFun, ADC10_VECTOR)
-{   counterOfInterrupt++;
-switch (state) {
-case AD_INCH_A15:
-    voltage[AD_INCH_A15] = ADC10MEM;
-    state--;
-    break;
-case AD_INCH_A12:
-   voltage[AD_INCH_A12] = ADC10MEM;
-   state--;
-   break;
-case AD_INCH_A7:
-    voltage[AD_INCH_A7] = ADC10MEM;
-    state--;
-    break;
-case AD_INCH_A6:
-    voltage[AD_INCH_A6] = ADC10MEM;
-    state--;
-    break;
- case AD_INCH_A3:
-    voltage[AD_INCH_A3] = ADC10MEM;
-    state--;
-    break;
-case AD_INCH_A4:
-    voltage[AD_INCH_A4] = ADC10MEM;
-    state--;
-    break;
-case AD_INCH_A0:
-    state = MAX_AD_INCH;
-    ADReady=1;
-    break;
-
-default:
-    state--;
-    break;
-}
-/*	counterOfInterrupt++;
+{
+	counterOfInterrupt++;
 	switch (state) {
+	case AD_INCH_A15:
+		voltage[AD_INCH_A15] = ADC10MEM;
+		state--;
+		break;
 	case AD_INCH_A12:
-		AdValueGyroRoll = ADC10MEM;
+		voltage[AD_INCH_A12] = ADC10MEM;
 		state--;
 		break;
 	case AD_INCH_A7:
-		AdValueGyroYaw = ADC10MEM;
+		voltage[AD_INCH_A7] = ADC10MEM;
 		state--;
 		break;
 	case AD_INCH_A6:
-		AdValueGyroNick = ADC10MEM;
-		state--;
-		break;
-	case AD_INCH_A15:
-		AdValueAccTop = ADC10MEM;
+		voltage[AD_INCH_A6] = ADC10MEM;
 		state--;
 		break;
 	case AD_INCH_A4:
-		AdValueAccNick = ADC10MEM;
+		voltage[AD_INCH_A4] = ADC10MEM;
 		state--;
 		break;
 	case AD_INCH_A3:
-		AdValueAccRoll = ADC10MEM;
+		voltage[AD_INCH_A3] = ADC10MEM;
 		state--;
 		break;
-	case 0:
+	case AD_INCH_A0:
 		state = MAX_AD_INCH;
 		ADReady = 1;
 		break;
+
 	default:
 		state--;
 		break;
+	}
+	/*	counterOfInterrupt++;
+	 switch (state) {
+	 case AD_INCH_A12:
+	 AdValueGyroRoll = ADC10MEM;
+	 state--;
+	 break;
+	 case AD_INCH_A7:
+	 AdValueGyroYaw = ADC10MEM;
+	 state--;
+	 break;
+	 case AD_INCH_A6:
+	 AdValueGyroNick = ADC10MEM;
+	 state--;
+	 break;
+	 case AD_INCH_A15:
+	 AdValueAccTop = ADC10MEM;
+	 state--;
+	 break;
+	 case AD_INCH_A4:
+	 AdValueAccNick = ADC10MEM;
+	 state--;
+	 break;
+	 case AD_INCH_A3:
+	 AdValueAccRoll = ADC10MEM;
+	 state--;
+	 break;
+	 case 0:
+	 state = MAX_AD_INCH;
+	 ADReady = 1;
+	 break;
+	 default:
+	 state--;
+	 break;
 
-	}*/
+	 }*/
 }
