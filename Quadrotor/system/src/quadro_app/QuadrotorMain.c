@@ -9,11 +9,14 @@
 int main(void) {
 	quadroInit();
 	showVersion(5);
-
+	BSP_ENABLE_INTERRUPTS();
+	ADC_Enable();
 	while (1) {
-		memset(msg, 0xFF, COMMAND_MAX_LENGTH_IN_BYTES);
-		if (getFromUart_BSP(msg) == GETUART_SUCCESS) {
-			writeToUart(msg, COMMAND_MAX_LENGTH_IN_BYTES);
+		if (ADReady != 0) {
+
+			ADReady = 0;
+			ADC_Enable();
+
 		}
 	}
 }

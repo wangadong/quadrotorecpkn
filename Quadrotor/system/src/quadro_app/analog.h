@@ -26,7 +26,14 @@
  void SearchDacGyroOffset(void);*/
 
 void ADC_Init(void);
-
+#define AD_INCH_A15 15
+#define AD_INCH_A4 4
+#define AD_INCH_A3 3
+#define AD_INCH_A12 12
+#define AD_INCH_A7 7
+#define AD_INCH_A6 6
+#define AD_INCH_A0 0
+#define MAX_AD_INCH 15
 // clear ADC enable & ADC Start Conversion & ADC Interrupt Enable bit
 #define ADC_Disable() ADC10CTL0 &=~ (ENC + ADC10SC+ADC10IE)
 // set ADC enable & ADC Start Conversion & ADC Interrupt Enable bit

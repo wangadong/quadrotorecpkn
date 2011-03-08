@@ -28,7 +28,9 @@
  uint8_t GyroDefectNick = 0, GyroDefectRoll = 0, GyroDefectYaw = 0;
  int8_t ExpandBaro = 0;
  uint8_t PressureSensorOffset;*/
-
+static volatile unsigned char state = MAX_AD_INCH;
+static volatile unsigned int counterOfInterrupt = 0;
+static volatile unsigned short voltage[MAX_AD_INCH+1] = { 0 };
 /****************************************************
  Initialize Analog Digital Converter
  ****************************************************/
@@ -45,10 +47,16 @@ void ADC_Init(void) {
 	 // Start AD conversion
 	 // restore global interrupt flags
 	 */
-//	ADC10CTL1 |= ADC10DIV_3 + ADC10SSEL_0 + CONSEQ_0;
-	ADC10CTL0 |= SREF_1 + ADC10SHT_2 + REF2_5V + REFON + ADC10ON + ADC10IE;
-	ADC10AE0 |= BIT4;
-	ADC10CTL1 &= ~ADC10IFG;
+	//	ADC10CTL1 |= ADC10DIV_3 + ADC10SSEL_0 + CONSEQ_0;
+	/* ADC…Ë÷√:16 x ADC10CLKs, V(+)=V(Ref),REF on, V(Ref)=2.5V */
+	ADC10CTL0 = SREF_1 | ADC10SHT_2 | REFON | REF2_5V | MSC | ADC10IE | ADC10ON;
+
+	/* enable INCH_* analog input */
+	ADC10AE0|=BIT3+BIT4+BIT6+BIT7;
+	ADC10AE1|=BIT4+BIT7;
+
+	/* ADC…Ë÷√:INCH=A12, Sequence-of-Channels Mode, ADC10OSC, ADC10SC*/
+	ADC10CTL1 = INCH_15 | CONSEQ_1 | ADC10SSEL_0 | SHS_0;
 
 }
 
@@ -162,50 +170,75 @@ void ADC_Init(void) {
 //roll acc---A3
 //pitch(nick) acc---A4
 //top acc---A15
-
-/*BSP_ISR_FUNCTION( adcFun, ADC10_VECTOR)
- {
- static volatile unsigned int state = 0;
-
- switch (state++) {
- case 0:
- AdValueAccNick = ADC10MEM;
- //		AdValueAccNick = AdValueAccNick * 2.5 / 2013;
- break;
- case 1:
- AdValueGyroYaw = ADC10MEM;
- //		AdValueGyroYaw = AdValueGyroYaw * 2.5 / 2013;
- break;
- case 2:
- AdValueGyroNick = ADC10MEM;
- //		AdValueGyroNick = AdValueGyroNick * 2.5 / 2013;
- break;
- case 3:
- AdValueGyroRoll = ADC10MEM;
- //		AdValueGyroRoll = AdValueGyroRoll * 2.5 / 2013;
- break;
- case 4:
- AdValueAccRoll = ADC10MEM;
- //		AdValueAccRoll = AdValueAccRoll * 2.5 / 2013;
- break;
- case 5:
- AdValueAccTop = ADC10MEM;
- //		AdValueAccTop = AdValueAccTop * 2.5 / 2013;
- ADReady = 1;
- getADValues();
- writeToUart(msg, 14);
- state = 0;
- break;
- default:
- state = 0;
-
- }
- }*/
 BSP_ISR_FUNCTION( adcFun, ADC10_VECTOR)
- {
-	long temp;
-//	 AdValueAccNick = (int)ADC10MEM * 2500 /1024;
-	AdValueAccNick = (int)ADC10MEM;
-	 writeToUart_BSP(&AdValueAccNick,1);
-	 ADReady=1;
- }
+{   counterOfInterrupt++;
+switch (state) {
+case AD_INCH_A15:
+    voltage[AD_INCH_A15] = ADC10MEM;
+    state--;
+    break;
+case AD_INCH_A12:
+   voltage[AD_INCH_A12] = ADC10MEM;
+   state--;
+   break;
+case AD_INCH_A7:
+    voltage[AD_INCH_A7] = ADC10MEM;
+    state--;
+    break;
+case AD_INCH_A6:
+    voltage[AD_INCH_A6] = ADC10MEM;
+    state--;
+    break;
+ case AD_INCH_A3:
+    voltage[AD_INCH_A3] = ADC10MEM;
+    state--;
+    break;
+case AD_INCH_A4:
+    voltage[AD_INCH_A4] = ADC10MEM;
+    state--;
+    break;
+case AD_INCH_A0:
+    state = MAX_AD_INCH;
+    ADReady=1;
+    break;
+
+default:
+    state--;
+    break;
+}
+/*	counterOfInterrupt++;
+	switch (state) {
+	case AD_INCH_A12:
+		AdValueGyroRoll = ADC10MEM;
+		state--;
+		break;
+	case AD_INCH_A7:
+		AdValueGyroYaw = ADC10MEM;
+		state--;
+		break;
+	case AD_INCH_A6:
+		AdValueGyroNick = ADC10MEM;
+		state--;
+		break;
+	case AD_INCH_A15:
+		AdValueAccTop = ADC10MEM;
+		state--;
+		break;
+	case AD_INCH_A4:
+		AdValueAccNick = ADC10MEM;
+		state--;
+		break;
+	case AD_INCH_A3:
+		AdValueAccRoll = ADC10MEM;
+		state--;
+		break;
+	case 0:
+		state = MAX_AD_INCH;
+		ADReady = 1;
+		break;
+	default:
+		state--;
+		break;
+
+	}*/
+}
