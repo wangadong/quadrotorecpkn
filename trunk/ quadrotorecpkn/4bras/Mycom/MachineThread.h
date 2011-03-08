@@ -29,16 +29,16 @@ class machineThread : public QThread
         int byteEnvoie;
         bool ifsave;
         QTimer *readportTimer;
-        void getdataSpace(char* buff);
+        void getdataDynamique(char * buff);
         void savedataSpace(QTextStream * dataSpace);
-        void savedataDynamique(QTextStream * dataDynamique);
+        void savedataDynamique(UN_DATA_DYNAMIQUE);
         void senddataMachine(QTextStream * dataMachine);
     signals:
         void readsignal();
         void showdataSpace();
-        void showdataDynamique();
         void setopenbutton(const char * string);
         void threadError(int error);
+        void setinfoDynamique(UN_DATA_DYNAMIQUE dataD);
         void setCRotation(float C);
         void setPRotation(float P);
         void setRRotation(float R);

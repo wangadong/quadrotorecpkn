@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'MachineThread.h'
 **
-** Created: Sat Mar 5 23:30:40 2011
+** Created: Wed Mar 9 00:48:39 2011
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -33,30 +33,31 @@ static const uint qt_meta_data_machineThread[] = {
  // signals: signature, parameters, type, tag, flags
       15,   14,   14,   14, 0x05,
       28,   14,   14,   14, 0x05,
-      44,   14,   14,   14, 0x05,
-      71,   64,   14,   14, 0x05,
-     104,   98,   14,   14, 0x05,
-     123,  121,   14,   14, 0x05,
+      51,   44,   14,   14, 0x05,
+      84,   78,   14,   14, 0x05,
+     107,  101,   14,   14, 0x05,
      145,  143,   14,   14, 0x05,
      167,  165,   14,   14, 0x05,
-     194,  187,   14,   14, 0x05,
-     223,  216,   14,   14, 0x05,
-     251,  245,   14,   14, 0x05,
+     189,  187,   14,   14, 0x05,
+     216,  209,   14,   14, 0x05,
+     245,  238,   14,   14, 0x05,
+     273,  267,   14,   14, 0x05,
 
  // slots: signature, parameters, type, tag, flags
-     273,   14,  268,   14, 0x0a,
-     294,  284,   14,   14, 0x0a,
+     295,   14,  290,   14, 0x0a,
+     316,  306,   14,   14, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_machineThread[] = {
     "machineThread\0\0readsignal()\0showdataSpace()\0"
-    "showdataDynamique()\0string\0"
-    "setopenbutton(const char*)\0error\0"
-    "threadError(int)\0C\0setCRotation(float)\0"
-    "P\0setPRotation(float)\0R\0setRRotation(float)\0"
-    "recevu\0byteRecevuChange(int)\0envoie\0"
+    "string\0setopenbutton(const char*)\0"
+    "error\0threadError(int)\0dataD\0"
+    "setinfoDynamique(UN_DATA_DYNAMIQUE)\0"
+    "C\0setCRotation(float)\0P\0setPRotation(float)\0"
+    "R\0setRRotation(float)\0recevu\0"
+    "byteRecevuChange(int)\0envoie\0"
     "byteEnvoieChange(int)\0state\0"
     "portIsOpen(bool)\0char\0readport()\0"
     "port_name\0openport(QString)\0"
@@ -93,9 +94,9 @@ int machineThread::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         switch (_id) {
         case 0: readsignal(); break;
         case 1: showdataSpace(); break;
-        case 2: showdataDynamique(); break;
-        case 3: setopenbutton((*reinterpret_cast< const char*(*)>(_a[1]))); break;
-        case 4: threadError((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 2: setopenbutton((*reinterpret_cast< const char*(*)>(_a[1]))); break;
+        case 3: threadError((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 4: setinfoDynamique((*reinterpret_cast< UN_DATA_DYNAMIQUE(*)>(_a[1]))); break;
         case 5: setCRotation((*reinterpret_cast< float(*)>(_a[1]))); break;
         case 6: setPRotation((*reinterpret_cast< float(*)>(_a[1]))); break;
         case 7: setRRotation((*reinterpret_cast< float(*)>(_a[1]))); break;
@@ -125,20 +126,21 @@ void machineThread::showdataSpace()
 }
 
 // SIGNAL 2
-void machineThread::showdataDynamique()
+void machineThread::setopenbutton(const char * _t1)
 {
-    QMetaObject::activate(this, &staticMetaObject, 2, 0);
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 2, _a);
 }
 
 // SIGNAL 3
-void machineThread::setopenbutton(const char * _t1)
+void machineThread::threadError(int _t1)
 {
     void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 3, _a);
 }
 
 // SIGNAL 4
-void machineThread::threadError(int _t1)
+void machineThread::setinfoDynamique(UN_DATA_DYNAMIQUE _t1)
 {
     void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 4, _a);

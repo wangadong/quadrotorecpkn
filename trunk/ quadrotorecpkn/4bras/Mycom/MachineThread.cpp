@@ -4,6 +4,7 @@
 machineThread::machineThread(Win_QextSerialPort *port)
 {
     this->port=port;
+    port->setTimeout(10);
     readportTimer=new QTimer(this);
     QObject::connect(readportTimer, SIGNAL(timeout()), this, SLOT(readport()));
     QFile file("datatest.txt");
@@ -57,26 +58,58 @@ void machineThread::openport(QString port_name)
 //---------------------------------------------------------------------------------------------------------
 char machineThread::readport()
 {
-    char * buff;
+    char buff[14];
     int numBytes;
     numBytes = port->bytesAvailable();
-        if(numBytes > 0)
+        if(numBytes >= 0)
         {
-            port->read(buff, 1);
-            byteRecevu+=1;
-            emit byteRecevuChange(byteRecevu);
-            readportTimer->stop(); 
-            getdataSpace(buff);
+            port->read(buff,1);
+            if(buff[0]=='B')
+            {
+                byteRecevu+=1;
+                emit byteRecevuChange(byteRecevu);
+                readportTimer->stop();
+                getdataDynamique(buff);
+            }
         }
     return buff[0];
 }
 
 //---------------------------------------------------------------------------------------------------------
-void machineThread::getdataSpace(char* buff)
+void machineThread::getdataDynamique(char * buff)
 {
-    UN_DATA_SPACE dataS;
-    port->read(buff,1);
-    dataS.dataspace.RotC = float(* buff);
-    emit setCRotation(dataS.dataspace.RotC);
+    UN_DATA_DYNAMIQUE dataD;
+    int avail=port->bytesAvailable();
+    if (avail>=0)
+    {
+        unsigned int temp=0;
+        port->read(buff,13);
+//        Accx
+        qDebug("%c",buff[0]);
+        temp=((buff[0]<<8)+buff[1]);
+        dataD.datadynamique.Accx=float(temp);
+//        Accy
+        temp=0;
+        temp=((buff[2]<<8)+buff[3]);
+        dataD.datadynamique.Accy=float(temp);
+//        Accz
+        temp=0;
+        temp=((buff[4]<<8)+buff[5]);
+        dataD.datadynamique.Accz=float(temp);
+//        Pulx
+        temp=0;
+        temp=((buff[6]<<8)+buff[7]);
+        dataD.datadynamique.Vrotx=float(temp);
+//        Puly
+        temp=0;
+        temp=((buff[8]<<8)+buff[9]);
+        dataD.datadynamique.Vroty=float(temp);
+//        Pulz
+        temp=0;
+        temp=((buff[10]<<8)+buff[11]);
+        dataD.datadynamique.Vrotz=float(temp);
+    }
+//    savedataDynamique(dataD);
+    emit setinfoDynamique(dataD);
     readportTimer->start();
 }
