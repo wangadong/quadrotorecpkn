@@ -31,5 +31,12 @@ struct dataDynamique
     float Vroty;
     float Vrotz;
 };
+
+union UN_DATA_DYNAMIQUE
+{
+    struct dataDynamique datadynamique;
+    char temp[10];
+};
+
 #pragma pack()
 #endif // DATA_PROTOCOL_H

@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'Mycom.h'
 **
-** Created: Sat Mar 5 23:30:31 2011
+** Created: Wed Mar 9 00:48:34 2011
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_Mycom[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-      12,   14, // methods
+      15,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -38,13 +38,16 @@ static const uint qt_meta_data_Mycom[] = {
       55,   49,    6,    6, 0x0a,
       72,    6,    6,    6, 0x0a,
       99,    6,    6,    6, 0x0a,
-     146,    6,    6,    6, 0x0a,
-     194,    6,    6,    6, 0x0a,
-     240,    6,    6,    6, 0x0a,
-     286,    6,    6,    6, 0x0a,
-     336,    6,    6,    6, 0x0a,
-     359,  353,    6,    6, 0x0a,
-     391,  385,    6,    6, 0x0a,
+     115,    6,    6,    6, 0x0a,
+     128,    6,    6,    6, 0x0a,
+     175,    6,    6,    6, 0x0a,
+     223,    6,    6,    6, 0x0a,
+     269,    6,    6,    6, 0x0a,
+     315,    6,    6,    6, 0x0a,
+     371,  365,    6,    6, 0x0a,
+     416,  407,    6,    6, 0x0a,
+     438,    6,    6,    6, 0x0a,
+     461,  455,    6,    6, 0x0a,
 
        0        // eod
 };
@@ -52,14 +55,16 @@ static const uint qt_meta_data_Mycom[] = {
 static const char qt_meta_stringdata_Mycom[] = {
     "Mycom\0\0port_name\0comopen(QString)\0"
     "opencom_port()\0state\0portisopen(bool)\0"
-    "setopenbutton(const char*)\0"
+    "setopenbutton(const char*)\0cleartextArea()\0"
+    "recountNum()\0"
     "comboBox_Baudrate_currentIndexChanged(QString)\0"
     "comboBox_Paritybit_currentIndexChanged(QString)\0"
     "comboBox_Databit_currentIndexChanged(QString)\0"
     "comboBox_Stopbit_currentIndexChanged(QString)\0"
     "comboBox_Controlflow_currentIndexChanged(QString)\0"
-    "verifier_check()\0dataS\0writeDataSpace(dataSpace)\0"
-    "error\0threaderror(int)\0"
+    "dataD\0setinfoDynamique(UN_DATA_DYNAMIQUE)\0"
+    "datatemp\0writedataSpace(char*)\0"
+    "verifier_check()\0error\0threaderror(int)\0"
 };
 
 const QMetaObject Mycom::staticMetaObject = {
@@ -95,17 +100,20 @@ int Mycom::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 1: opencom_port(); break;
         case 2: portisopen((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 3: setopenbutton((*reinterpret_cast< const char*(*)>(_a[1]))); break;
-        case 4: comboBox_Baudrate_currentIndexChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 5: comboBox_Paritybit_currentIndexChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 6: comboBox_Databit_currentIndexChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 7: comboBox_Stopbit_currentIndexChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 8: comboBox_Controlflow_currentIndexChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 9: verifier_check(); break;
-        case 10: writeDataSpace((*reinterpret_cast< dataSpace(*)>(_a[1]))); break;
-        case 11: threaderror((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 4: cleartextArea(); break;
+        case 5: recountNum(); break;
+        case 6: comboBox_Baudrate_currentIndexChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 7: comboBox_Paritybit_currentIndexChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 8: comboBox_Databit_currentIndexChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 9: comboBox_Stopbit_currentIndexChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 10: comboBox_Controlflow_currentIndexChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 11: setinfoDynamique((*reinterpret_cast< UN_DATA_DYNAMIQUE(*)>(_a[1]))); break;
+        case 12: writedataSpace((*reinterpret_cast< char*(*)>(_a[1]))); break;
+        case 13: verifier_check(); break;
+        case 14: threaderror((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
-        _id -= 12;
+        _id -= 15;
     }
     return _id;
 }

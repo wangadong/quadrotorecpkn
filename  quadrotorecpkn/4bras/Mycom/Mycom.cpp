@@ -22,8 +22,8 @@ Mycom::Mycom()
     label_Send_out=new QLabel(tr("Send out"));
     label_Received=new QLabel(tr("Recived"));
     label_Interval=new QLabel(tr("Interval"));
-    label_DataSource=new QLabel(tr("Data source"));
-    label_ProcessMode=new QLabel(tr("Process mode"));
+    label_Numrecevu=new QLabel(tr("Data recevu number"));
+    label_Numenvoie=new QLabel(tr("Data envoie number"));
 
     label_Datas_envoyes=new QLabel(tr("Datas envoyes"));
     label_Datas_recevus=new QLabel(tr("Datas Recevus"));
@@ -35,6 +35,8 @@ Mycom::Mycom()
     lineEdit_ang_y = new QLineEdit();
     lineEdit_ang_z = new QLineEdit();
     lineEdit_barometre=new QLineEdit();
+    lineEdit_Numrecevu = new QLineEdit();
+    lineEdit_Numenvoie = new QLineEdit();
  //Creat Combobox---------------------------------------------------------------------------------------------
     comboBox_ComNum = new QComboBox();  //Comname
     comboBox_Baudrate = new QComboBox();  //Baudrate
@@ -42,7 +44,6 @@ Mycom::Mycom()
     comboBox_Data_bit = new QComboBox();  //Databit
     comboBox_Stop_bit = new QComboBox();  //Stopbit
     comboBox_Control_flow = new QComboBox();  //Controlflow
-    comboBox_DataSource = new QComboBox();  //Datasource
  //Creat Textedit---------------------------------------------------------------------------------------------
     textEdit_Send_out = new QTextEdit();
     textEdit_Recevied = new QTextEdit;
@@ -58,10 +59,6 @@ Mycom::Mycom()
     pushButton_Send->setText(tr("Send"));
     pushButton_LoopSend = new QPushButton();
     pushButton_LoopSend->setText(tr("LoopSend"));
- //Creat checkbox--------------------------------------------------------------------------------------------
-    checkBox_Storage = new QCheckBox(tr("Storage"));
-    checkBox_Display = new QCheckBox(tr("Display"));
-    checkBox_Draw = new QCheckBox(tr("Draw"));
 //Layout
 //Uplayout:gird
     QGridLayout * UpLayout = new QGridLayout();
@@ -88,8 +85,8 @@ Mycom::Mycom()
     MidLayout->addWidget(label_Data_bit,3,0);
     MidLayout->addWidget(label_Stop_bit,4,0);
     MidLayout->addWidget(label_Control_flow,0,2);
-    MidLayout->addWidget(label_DataSource,1,2);
-    MidLayout->addWidget(label_ProcessMode,2,2);
+    MidLayout->addWidget(label_Numrecevu,1,2);
+    MidLayout->addWidget(label_Numenvoie,2,2);
 
     MidLayout->addWidget(comboBox_ComNum,0,1);
     MidLayout->addWidget(comboBox_Baudrate,1,1);
@@ -97,11 +94,8 @@ Mycom::Mycom()
     MidLayout->addWidget(comboBox_Data_bit,3,1);
     MidLayout->addWidget(comboBox_Stop_bit,4,1);
     MidLayout->addWidget(comboBox_Control_flow,0,3);
-    MidLayout->addWidget(comboBox_DataSource,1,3);
-
-    MidLayout->addWidget(checkBox_Storage,2,3);
-    MidLayout->addWidget(checkBox_Display,3,3);
-    MidLayout->addWidget(checkBox_Draw,4,3);
+    MidLayout->addWidget(lineEdit_Numrecevu,1,3);
+    MidLayout->addWidget(lineEdit_Numenvoie,2,3);
 //Baselayout:vertical
     QVBoxLayout * BaseLayout=new QVBoxLayout();
     BaseLayout->addWidget(label_Datas_envoyes);
@@ -122,9 +116,6 @@ Mycom::Mycom()
 //Init
     init_com();
 //Creat port
-    port=new Win_QextSerialPort();
-    connect(port,SIGNAL(readyRead()),this,SLOT(readMycom()));
-
     port = new Win_QextSerialPort();
     byteRecevu = byteEnvoie = 0;
     thread = new machineThread(port);
@@ -140,11 +131,16 @@ Mycom::Mycom()
                      this,SLOT(comboBox_Stopbit_currentIndexChanged(const QString &)));
     QObject::connect(comboBox_Control_flow,SIGNAL(currentIndexChanged(const QString &)),
                      this,SLOT(comboBox_Controlflow_currentIndexChanged(const QString &)));
+//button相关
     QObject::connect(pushButton_OpenCom, SIGNAL(clicked()), this, SLOT(opencom_port()));
-    QObject::connect(this,SIGNAL(comopen(QString)),thread,SLOT(openport(QString)));
     QObject::connect(thread,SIGNAL(setopenbutton(const char*)),this,SLOT(setopenbutton(const char*)));
+    QObject::connect(pushButton_ClearReceptionArea,SIGNAL(clicked()),this,SLOT(cleartextArea()));
+    QObject::connect(pushButton_Recount,SIGNAL(clicked()),this,SLOT(recountNum()));
+//串口相关
+    QObject::connect(this,SIGNAL(comopen(QString)),thread,SLOT(openport(QString)));
     QObject::connect(thread,SIGNAL(threadError(int)),this,SLOT(threaderror(int)));
     QObject::connect(thread,SIGNAL(portIsOpen(bool)),this,SLOT(portisopen(bool)));
+    QObject::connect(thread,SIGNAL(setinfoDynamique(UN_DATA_DYNAMIQUE)),this,SLOT(setinfoDynamique(UN_DATA_DYNAMIQUE)));
  }
 //-----------------------------------------------------------------------------------------------------------
 void Mycom::init_com()
@@ -335,7 +331,6 @@ void Mycom::comboBox_Controlflow_currentIndexChanged(const QString &Controlflow)
     else if(Controlflow==tr("Hard")) port->setFlowControl(FLOW_HARDWARE);
 }
 //-----------------------------------------------------------------------------------------
-//-----------------------------------------------------------------------------------------
 //checkBox相关
 void Mycom::verifier_check()
 {
@@ -352,10 +347,6 @@ if (state)
         comboBox_Data_bit->setEnabled(false);
         comboBox_Stop_bit->setEnabled(false);
         comboBox_Control_flow->setEnabled(false);
-        comboBox_DataSource->setEnabled(false);
-        checkBox_Storage->setEnabled(false);
-        checkBox_Display->setEnabled(false);
-        checkBox_Draw->setEnabled(false);
     }
 else
     {
@@ -365,29 +356,51 @@ else
         comboBox_Data_bit->setEnabled(true);
         comboBox_Stop_bit->setEnabled(true);
         comboBox_Control_flow->setEnabled(true);
-        comboBox_DataSource->setEnabled(true);
-        checkBox_Storage->setEnabled(true);
-        checkBox_Display->setEnabled(true);
-        checkBox_Draw->setEnabled(true);
     }
 }
 //--------------------------------------------------------------------------------------------------
-void Mycom::writeDataSpace(dataSpace dataS)
+void Mycom::writedataSpace(char * datatemp)
 {
     textEdit_Recevied->append("dataSpace_general information:\n");
-    textEdit_Recevied->insertPlainText(";  \n PosX: ");
-    textEdit_Recevied->insertPlainText(msg.number(dataS.PosX,'g',16));
-    textEdit_Recevied->insertPlainText(";  \n PosY: ");
-    textEdit_Recevied->insertPlainText(msg.number(dataS.PosY,'g',16));
-    textEdit_Recevied->insertPlainText(";  \n PosZ: ");
-    textEdit_Recevied->insertPlainText(msg.number(dataS.PosZ,'g',16));
-    textEdit_Recevied->insertPlainText(";  \n RotC: ");
-    textEdit_Recevied->insertPlainText(msg.number(dataS.RotC,'g',16));
-    textEdit_Recevied->insertPlainText(";  \n RotP: ");
-    textEdit_Recevied->insertPlainText(msg.number(dataS.RotP,'g',16));
-    textEdit_Recevied->insertPlainText(";  \n RotR: ");
-    textEdit_Recevied->insertPlainText(msg.number(dataS.RotR,'g',16));
-    textEdit_Recevied->insertPlainText("\n\n");
+//    textEdit_Recevied->insertPlainText(";  \n PosX: ");
+//    textEdit_Recevied->insertPlainText(msg.number(dataS.PosX,'g',16));
+//    textEdit_Recevied->insertPlainText(";  \n PosY: ");
+//    textEdit_Recevied->insertPlainText(msg.number(dataS.PosY,'g',16));
+//    textEdit_Recevied->insertPlainText(";  \n PosZ: ");
+//    textEdit_Recevied->insertPlainText(msg.number(dataS.PosZ,'g',16));
+//    textEdit_Recevied->insertPlainText(";  \n RotC: ");
+//    textEdit_Recevied->insertPlainText(msg.number(dataS.RotC,'g',16));
+//    textEdit_Recevied->insertPlainText(";  \n RotP: ");
+//    textEdit_Recevied->insertPlainText(msg.number(dataS.RotP,'g',16));
+//    textEdit_Recevied->insertPlainText(";  \n RotR: ");
+//    textEdit_Recevied->insertPlainText(msg.number(dataS.RotR,'g',16));
+//    textEdit_Recevied->insertPlainText("\n\n");
+    for(int i=0;i<=9;i++)
+    {
+       msg.setNum(double(float(int(datatemp[i]))-48.0));
+       textEdit_Recevied->insertPlainText(msg);
+       textEdit_Recevied->insertPlainText("\n");
+    }
+//    textEdit_Recevied->insertPlainText((datatemp[0]));
+//    textEdit_Recevied->insertPlainText("\n");
+//    textEdit_Recevied->insertPlainText((datatemp[1]));
+//    textEdit_Recevied->insertPlainText("\n");
+//    textEdit_Recevied->insertPlainText((datatemp[2]));
+//    textEdit_Recevied->insertPlainText("\n");
+//    textEdit_Recevied->insertPlainText((datatemp[3]));
+//    textEdit_Recevied->insertPlainText("\n");
+//    textEdit_Recevied->insertPlainText((datatemp[4]));
+//    textEdit_Recevied->insertPlainText("\n");
+//    textEdit_Recevied->insertPlainText((datatemp[5]));
+//    textEdit_Recevied->insertPlainText("\n");
+//    textEdit_Recevied->insertPlainText((datatemp[6]));
+//    textEdit_Recevied->insertPlainText("\n");
+//    textEdit_Recevied->insertPlainText((datatemp[7]));
+//    textEdit_Recevied->insertPlainText("\n");
+//    textEdit_Recevied->insertPlainText((datatemp[8]));
+//    textEdit_Recevied->insertPlainText("\n");
+//    textEdit_Recevied->insertPlainText((datatemp[9]));
+//    textEdit_Recevied->insertPlainText("\n");
 }
 //--------------------------------------------------------------------------------------------------------
 void Mycom::setopenbutton(const char* openorclose)
@@ -399,3 +412,32 @@ void Mycom::threaderror(int error)
 {
 
 }
+//------------------------------------------------------------------------------------------------------------
+void Mycom::cleartextArea()
+{
+    textEdit_Send_out->clear();
+    textEdit_Recevied->clear();
+}
+//-----------------------------------------------------------------------------------------------------------
+void Mycom::recountNum()
+{
+    lineEdit_Numrecevu->clear();
+    lineEdit_Numenvoie->clear();
+}
+//------------------------------------------------------------------------------------------------------------
+void Mycom::setinfoDynamique(UN_DATA_DYNAMIQUE dataD)
+{
+    lineEdit_acce_x->clear();
+    lineEdit_acce_x->insert(msg.number(dataD.datadynamique.Accx));
+    lineEdit_acce_y->clear();
+    lineEdit_acce_y->insert(msg.number(dataD.datadynamique.Accy));
+    lineEdit_acce_z->clear();
+    lineEdit_acce_z->insert(msg.number(dataD.datadynamique.Accz));
+    lineEdit_ang_x->clear();
+    lineEdit_ang_x->insert(msg.number(dataD.datadynamique.Vrotx));
+    lineEdit_ang_y->clear();
+    lineEdit_ang_y->insert(msg.number(dataD.datadynamique.Vroty));
+    lineEdit_ang_z->clear();
+    lineEdit_ang_z->insert(msg.number(dataD.datadynamique.Vrotz));
+}
+//-------------------------------------------------------------------------------------------------------------
