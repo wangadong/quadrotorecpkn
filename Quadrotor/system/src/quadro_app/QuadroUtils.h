@@ -46,8 +46,8 @@
 #define AD_ACC_TOP_POSITION		11
 #define MsgEnd  13
 
-static addr_t addrOfSenderR = {INVALID_ADDRESS};
-static addr_t addrOfSenderS = {RECEIVER_ADDRESS};
+static addr_t addrInvalid = {INVALID_ADDRESS};
+static addr_t addrOfSender = {RECEIVER_ADDRESS};
 /**
  * addresses of this nodes.
  */
@@ -66,7 +66,7 @@ void errorLog(void);
  * æØ∏ÊÃ· æ using LED
  */
 void warningLog(void);
-void cal_Sensor_Volt(void);
+//void cal_Sensor_Volt(void);
 void getADValues(void);
 void writeToUart(unsigned char *, unsigned char);
 unsigned char getFromUart(unsigned char *);
