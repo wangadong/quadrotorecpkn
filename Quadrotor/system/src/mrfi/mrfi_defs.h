@@ -7,7 +7,7 @@
 #define MRFI_DEFS_H
 
 #include "BspDef.h"
-
+#define WirelessSender
 /* GDO0 Pin Configuration P2.1 */
 #define __mrfi_GDO0_BIT__                     1
 #define MRFI_CONFIG_GDO0_PIN_AS_INPUT()       st( P2SEL &= ~BV(__mrfi_GDO0_BIT__); ) /* clear pin special function default */

@@ -4,7 +4,7 @@
  *  Created on: 2011-1-5
  *      Author: WANGADONG
  */
-#define WirelessSender
+
 #include "QuadroUtils.h"
 
 int main(void) {
