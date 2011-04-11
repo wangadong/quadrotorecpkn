@@ -28,7 +28,7 @@ int main(void) {
 			memset(msg, 0xFF, COMMAND_MAX_LENGTH_IN_BYTES);
 			getADValues();
 			SMPL_Ioctl(IOCTL_OBJ_RADIO, IOCTL_ACT_RADIO_RXON, 0);
-			if (send(&addrOfSender, msg) != SUCCESS) {
+			if (send(&addrOfSender, msg) == SUCCESS) {
 				warningLog();
 			}
 			writeToUart(msg, COMMAND_MAX_LENGTH_IN_BYTES);

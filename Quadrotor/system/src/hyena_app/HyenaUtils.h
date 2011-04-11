@@ -148,15 +148,15 @@ typedef struct {
 #define RSSI_POSITION_IN_COMMAND 6
 
 #define IDLE_PER_LOOP 500
-/**
- * store address of receive node.
- */
-static addr_t addrOfSenderR = INVALID_ADDRESS;
-static addr_t addrOfSenderS = RSSI_RECEIVER_ADDRESS;
-/**
- * addresses of this nodes.
- */
-static addr_t addrOfNode = RSSI_SENDER_ADDRESS;
+///**
+// * store address of receive node.
+// */
+//static addr_t addrOfSenderR = INVALID_ADDRESS;
+//static addr_t addrOfSenderS = RSSI_RECEIVER_ADDRESS;
+///**
+// * addresses of this nodes.
+// */
+//static addr_t addrOfNode = RSSI_SENDER_ADDRESS;
 unsigned char send(addr_t *, unsigned char *);
 unsigned char receive(addr_t *, unsigned char *);
 void turnOnWOR(void);
