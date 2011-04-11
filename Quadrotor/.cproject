@@ -2764,10 +2764,10 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="HyenaNode_End.c|HyenaNode_Relay.c|NodeDefinition_Relay1.h|TestSend_NodeA.c|NodeDefinition_End1.h|TestFlash.c|TestSend_NodeB.c|NwkMain.c" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="system/test"/>
 						<entry excluding="analog.h|analog.c|HWI2CSlave.c|MSP430ForSHT.c|GPIOSimI2CMaster_boreal.c|HWI2CSlave.h" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="system/src/bsp"/>
-						<entry excluding="system/src/nwk/SMPL.h|system/src/nwk/SMPL.c|system/src/quadro_app/QuadrotorMain.c|system/src/quadro_app/QuadroUtils.h|system/src/quadro_app/QuadroUtils.c|system/test_board|hyena_nwk/system/src/bsp|system/test|hyena_nwk/system/src/hyena_app|system/test_nwk|hyena_nwk/system/test_board|hyena_nwk/system/test_nwk|hyena_nwk/system/test|system/src/hyena_app|system/src/bsp" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name=""/>
 						<entry excluding="HyenaUtils.h|TestUART.h|HyenaNode_2232.c|HyenaRoot.c|HyenaRoot.h|RSSIDetector_Sender.c|WireDetector.c" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="system/src/hyena_app"/>
+						<entry excluding="system/src/quadro_app/PWMtest.c|system/src/nwk/SMPL.h|system/src/nwk/SMPL.c|system/src/quadro_app/QuadrotorMain.c|system/src/quadro_app/QuadroUtils.h|system/src/quadro_app/QuadroUtils.c|system/test_board|hyena_nwk/system/src/bsp|system/test|hyena_nwk/system/src/hyena_app|system/test_nwk|hyena_nwk/system/test_board|hyena_nwk/system/test_nwk|hyena_nwk/system/test|system/src/hyena_app|system/src/bsp" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name=""/>
+						<entry excluding="PWMtest.c|HyenaNode_End.c|HyenaNode_Relay.c|NodeDefinition_Relay1.h|TestSend_NodeA.c|NodeDefinition_End1.h|TestFlash.c|TestSend_NodeB.c|NwkMain.c" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="system/test"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -5256,7 +5256,7 @@
 					<sourceEntries>
 						<entry excluding="TMP275.h|TMP275.c|SHT10SensorDriver.h|SHT10SensorDriver.c|SHT10.h|SHT10.c|Power.h|Power.c|HyenaWire.h|HyenaWire.c|Flash.h|Flash.c|HWI2CSlave.c|MSP430ForSHT.c|GPIOSimI2CMaster_boreal.c|HWI2CSlave.h" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="system/src/bsp"/>
 						<entry excluding="*.*" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="system/test"/>
-						<entry excluding="system/src/quadro_app/WirelessSender.c|system/src/nwk/SMPL.c|system/src/nwk/SMPL.h|system/test_board|hyena_nwk/system/src/bsp|system/test|hyena_nwk/system/src/hyena_app|system/test_nwk|hyena_nwk/system/test_board|hyena_nwk/system/test_nwk|hyena_nwk/system/test|system/src/hyena_app|system/src/bsp" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name=""/>
+						<entry excluding="system/src/quadro_app/PWMtest.c|system/src/quadro_app/WirelessSender.c|system/src/nwk/SMPL.c|system/src/nwk/SMPL.h|system/test_board|hyena_nwk/system/src/bsp|system/test|hyena_nwk/system/src/hyena_app|system/test_nwk|hyena_nwk/system/test_board|hyena_nwk/system/test_nwk|hyena_nwk/system/test|system/src/hyena_app|system/src/bsp" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -7742,7 +7742,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="system/src/nwk/SMPLQ.h|system/src/nwk/SMPLQ.c|system/src/hyena_app/RSSIDetector_Sender.c|system/src/quadro_app" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="system/src/hyena_app|system/src/nwk/SMPLQ.h|system/src/nwk/SMPLQ.c|system/src/hyena_app/RSSIDetector_Sender.c|system/src/quadro_app" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
