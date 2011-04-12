@@ -19,7 +19,6 @@ int main(void) {
 		SMPL_Ioctl(IOCTL_OBJ_RADIO, IOCTL_ACT_RADIO_RXON, 0);
 		if (receive(&addrInvalid, msg) == SUCCESS) {
 			if (send(&addrOfSender, msg) != SUCCESS) {
-				warningLog();
 			}
 			writeToUart(msg, COMMAND_MAX_LENGTH_IN_BYTES);
 		}
@@ -29,7 +28,6 @@ int main(void) {
 			getADValues();
 			SMPL_Ioctl(IOCTL_OBJ_RADIO, IOCTL_ACT_RADIO_RXON, 0);
 			if (send(&addrOfSender, msg) == SUCCESS) {
-				warningLog();
 			}
 			writeToUart(msg, COMMAND_MAX_LENGTH_IN_BYTES);
 			ADReady = 0;
