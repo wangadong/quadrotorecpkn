@@ -1,7 +1,7 @@
 /**************************************************************************************************
  Filename:       nwk_ioctl.c
 
- Description:    This file supports the SimpliciTI IOCTL implmentation. This interface
+ Description:    This file supports the SimpliciTI IOCTL implementation. This interface
  gives applications access to the "driver" network level functions
  when necessary.
 
@@ -45,13 +45,13 @@
 /******************************************************************************
  * @fn          nwk_rawSend
  *
- * @brief       Builds an outut frame based on information provided by the
+ * @brief       Builds an output frame based on information provided by the
  *              caller. This function allows a raw transmission to the target
  *              if the network address is known. this function is used a lot
  *              to support NWK applications.
  *
  * input parameters
- * @param   info    - pointer to strcuture containing info on how to build
+ * @param   info    - pointer to structure containing info on how to build
  *                    the outgoing frame.
  * output parameters
  *

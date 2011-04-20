@@ -17,7 +17,6 @@ void main(void) {
 	TBCCTL2 = OUTMOD_7; // TBCCR2 toggle/set
 	TBCCR2 = 96; // TBCCR2 PWM duty cycle
 	TBCTL = TBSSEL_1 + MC_3+TBCLR; // ACLK, up mode
-	while (1)
-		;
+	while (1);
 }
 
